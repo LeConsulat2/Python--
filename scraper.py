@@ -1,49 +1,26 @@
 import requests
-from requests import get
 import random
 from bs4 import BeautifulSoup
 
-movie_ids = [
-    238,
-    680,
-    550,
-    185,
-    641,
-    515042,
-    152532,
-    120467,
-    872585,
-    906126,
-    840430,
-    7801230
-]
+url = "https://careers.aut.ac.nz/search?search=cvid-faZd7"
+response = requests.get(url)
+html = response.content
+soup = BeautifulSoup(html, 'html.parser')
 
-for movie in movie_ids:
-    url = f"https://nomad-movies.nomadcoders.workers.dev/movies/{movie}"
-    response = requests.get(url)
+# List of class names representing dates to extract
+date_types = ['post-date', 'close-date']
 
-    if response.status_code == 200:
-       data = response.json()
-       title = data.get("title")
-       overview = data.get("overview")
-       vote_average = data.get("vote_average")
-
-       print(f"Movie: {movie}" 
-             f"Title: {title}"
-            f"Overview: {overview}" 
-             f"Vote Average: {vote_average}")
-    else:
-       print(f"Failed to fetch details for Movie ID {movie}. Status Code: {response.status_code}")
+for date_type in date_types:
+    dates = soup.find_all('span', class_=date_types)
+    print(f"Text content for date class '{date_type}':")
+    
+    for date in dates:
+        print(date.get_text(strip=True))
+    
+   
+ 
 
 
-
-
-
-# url = "https://careers.aut.ac.nz/search?search=cvid-faZd7"
-# random_number =random.randint(1,9999999)
-# response = requests.get(url, headers = {'user-agent': f'{random_number}'})
-# html = response.content
-# soup = BeautifulSoup(html, 'html.parser')
 # #parser - idea of taking huge data organising into tags#
 # a_tags = soup.find_all('a')
 
