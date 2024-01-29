@@ -17,7 +17,7 @@ for date_type in date_types:
     for date in dates:
         print(date.get_text(strip=True))
     
-   
+    # Separating output for each date class print("\n" + "="*50 + "\n")  
  
 
 
