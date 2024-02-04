@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Scraper</title>
+  </head>
+  <body>
+    <h1>Job Scraper</h1>
+
+    <form method="post">
+      <label for="search_term">Search for jobs:</label>
+      <input type="text" id="search_term" name="search_term" required />
+      <button type="submit">Search</button>
+    </form>
+
+    {% if search_term %}
+    <h2>Job Listings for '{{ search_term }}':</h2>
+    <h3>Berlin Startup Jobs:</h3>
+    <ul>
+      {% for job in berlin_startup_jobs %}
+      <li>
+        {{ job.company }} - {{ job.title }} (<a
+          href="{{ job.link }}"
+          target="_blank"
+          >Link</a
+        >)
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h3>We Work Remotely Jobs:</h3>
+    <ul>
+      {% for job in weworkremotely_jobs %}
+      <li>
+        {{ job.company }} - {{ job.title }} (<a
+          href="{{ job.link }}"
+          target="_blank"
+          >Link</a
+        >)
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h3>Web3 Career Jobs:</h3>
+    <ul>
+      {% for job in web3_career_jobs %}
+      <li>
+        {{ job.company }} - {{ job.title }} (<a
+          href="{{ job.link }}"
+          target="_blank"
+          >Link</a
+        >)
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </body>
+</html>
